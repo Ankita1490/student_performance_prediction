@@ -52,5 +52,5 @@ if __name__ == "__main__":
 
     train_arr, test_arr, preprocess_file_path = data_transformation.initiate_data_transformation(train_path, test_path)
     model_trainer = ModelTrainer()
-    model_trainer.initiate_model_train(train_arr,test_arr,preprocess_file_path)
+    model_trainer.initiate_model_train(train_arr,test_arr)
  

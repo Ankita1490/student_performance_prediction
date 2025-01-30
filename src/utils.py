@@ -1,6 +1,7 @@
 import os
 import sys
 from typing import Dict
+from time import time
 import numpy as np 
 import pandas as pd
 from src.exception import CustomException
@@ -9,6 +10,17 @@ import configparser
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import r2_score
        
+def timer(func):
+    def wrapper(*args, **kwargs):
+        start_time = time()
+        result = func(*args,**kwargs)
+        end_time = time()
+        execution_time = end_time -start_time
+        print(f"Total Execution Time: {execution_time}")
+        return result
+    return wrapper
+    
+        
 def catgorise_features(df: pd.DataFrame):
     columns = list(df.columns)
     cat_features, num_features =[],[]

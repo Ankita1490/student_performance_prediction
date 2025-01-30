@@ -17,7 +17,7 @@ from xgboost import XGBRegressor
 
 from src.exception import CustomException
 from src.logger import logging
-from src.utils import creating_model_parameters, evaluate_model, save_obj
+from src.utils import creating_model_parameters, evaluate_model, save_obj, timer
 
 config = configparser.ConfigParser(dict_type= OrderedDict)
 config.read('src\config.ini')
@@ -26,12 +26,12 @@ config.read('src\config.ini')
 @dataclass
 class ModelTrainerConfig:
     trained_model_file_path = os.path.join("artifacts","model.pkl")
-    
+  
 class ModelTrainer:
     def __init__(self):
         self.model_trainer_config =ModelTrainerConfig()
-        
-    def initiate_model_train(self, train_array, test_array, preprocessor_path):
+    @timer 
+    def initiate_model_train(self, train_array, test_array):
         try:
             logging.info("Splitting training and test input data")
             X_train, y_train, X_test, y_test = (
